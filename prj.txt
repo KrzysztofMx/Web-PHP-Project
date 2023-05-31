@@ -1,0 +1,159 @@
+gra{
+    tytuł
+    opis
+    cena
+    platformy
+    kategorie
+    //jakies zdjęcia też - linki do zdjęć
+    data-premiery
+    ilosc zakupiony7ch kopii
+}
+
+do importu osobno:
+menu
+footer
+
+
+main - home - index:
+menu
+sekcje:"
+    polecane - większe koło 4/5 na stronie - max width
+    trends - małe tyle ile się zmieści scrollowalne lewo prawo
+    reszta - w gridzie
+footer
+
+gra_box
+    img
+    tytuł
+    cena
+    buy_btn
+
+//------------------------------------------------------
+baza danych:
+produkt{
+    id
+    tytuł
+    opis
+    cena
+    data-premiery
+    ilosc zakupiony7ch kopii
+    polecane_przez_partie
+}
+
+produkt_zdjęcie{
+    id
+    primary (bool)
+    id_prod
+    ścieżka_do_zdjęcia
+}
+
+prodKategoria{
+    id
+    id_prod
+    id_kat
+}
+prodPlatforma{
+    id
+    id_prod
+    id_platformy
+}
+
+kategorie{
+    id
+    nazwa
+}
+
+platformy{
+    id
+    nazwa
+}
+
+user{
+    id
+    imie
+    nazwisko
+    data-urodzenia
+    email
+    nr tel
+}
+
+koszyk{
+    id
+    id_usera
+    id_produktu
+    ilosc
+}
+
+---cookiesy
+
+transakcje{
+    id
+    id_usera
+    data-dokonania
+    kwota
+}
+
+kupione_prod{
+    id
+    id_transakcji
+    id_produktu
+}
+
+--------------------------------------------
+
+CREATE TABLE `user` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    name varchar(30) not null,
+    surname varchar(30) not null,
+    username varchar(20) not null,
+    password varchar(255) not null,
+    birthday date not null,
+    email varchar(255) not null,
+    tel varchar(9) not null
+);
+----------------------------------------
+CREATE TABLE `product` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    title varchar(128) not null,
+    description text not null,
+    price float not null,
+    release_date date not null,
+    bought_copies_count int not null,
+    recommended boolean not null
+);
+
+CREATE TABLE `prod_img` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    `primary` boolean not null,
+    id_prod int not null,
+    img_name text not null
+);
+
+CREATE TABLE `prod_cat` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    id_product int not null,
+    id_category int not null
+);
+
+CREATE TABLE `prod_plat` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    id_product int not null,
+    id_platform int not null
+);
+
+CREATE TABLE `categories` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    name varchar(50) not null
+);
+
+CREATE TABLE `platforms` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    name varchar(50) not null
+);
+
+CREATE TABLE `shopping_cart` (
+	id int PRIMARY KEY AUTO_INCREMENT not null,
+    id_user int not null,
+    id_product int not null,
+    amount int not null
+);
